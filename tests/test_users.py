@@ -42,3 +42,26 @@ def test_bad_student_id_returns_422(client, bad_student_id):
         json=user_payload(uid=3, student_id=bad_student_id),
     )
     assert response.status_code == 422
+
+def test_get_users_returns_created_users(client):
+    client.post("/api/users", json=user_payload(uid=4, name="Alice", email="alice@atu.ie"))
+
+    response = client.get("/api/users")
+
+    assert response.status_code == 200
+    data = response.json()
+    assert len(data) == 1
+    assert data[0]["name"] == "Alice"
+
+def test_get_existing_user_returns_200(client):
+    client.post("/api/users", json=user_payload(uid=11))
+
+    response = client.get("/api/users/11")
+
+    assert response.status_code == 200
+    assert response.json()["user_id"] == 11
+
+def test_get_missing_user_returns_404(client):
+    response = client.get("/api/users/999")
+    assert response.status_code == 404
+    assert response.json()["detail"] == "User not found"
