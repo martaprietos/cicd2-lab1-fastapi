@@ -1,5 +1,4 @@
 import pytest
-from tests.conftest import client
 
 def user_payload(
     name="Paul",
@@ -34,19 +33,20 @@ def test_create_user_with_existing_user_id_returns_409(client):
 def test_bad_student_id_returns_422(client, bad_student_id):
     response = client.post(
         "/api/users",
-        json=user_payload(uid=3, student_id=bad_student_id),
+        json=user_payload(student_id=bad_student_id),
     )
     assert response.status_code == 422
 
 def test_get_users_returns_created_users(client):
-    client.post("/api/users", json=user_payload())
+    created = client.post("/api/users", json=user_payload()).json()
 
+    user_id = created["id"]
     response = client.get("/api/users")
 
     assert response.status_code == 200
     data = response.json()
     assert len(data) == 1
-    assert data[0]["name"] == "Alice"
+    assert data[0]["email"] == "paul@atu.ie"
 
 def test_get_existing_user_returns_200(client):
     created = client.post("/api/users",json=user_payload()).json()
@@ -55,7 +55,7 @@ def test_get_existing_user_returns_200(client):
     response = client.get(f"/api/users/{user_id}")
 
     assert response.status_code == 200
-    assert response.json()["email"] == "alice@atu.ie"
+    assert response.json()["email"] == "paul@atu.ie"
 
 def test_get_missing_user_returns_404(client):
     response = client.get("/api/users/999")
