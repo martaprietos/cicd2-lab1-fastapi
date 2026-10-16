@@ -3,7 +3,7 @@ from fastapi import FastAPI, HTTPException
 app = FastAPI(title="Product Service")
 
 PRODUCTS = {
-    1: {"id": 1, "name": "Laptop", "price": 899},
+    1: {"id": 1, "name": "Laptop", "price":899},
     2: {"id": 2, "name": "Mouse", "price": 25},
 }
 
