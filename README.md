@@ -1,38 +1,21 @@
-# CICD-2 FastAPI Lab Template
+# CICD-2 FastAPI
 
 This repository contains a FastAPI lab for the CICD-2 module.  
-Use this `README.md` as the standard structure for future labs.
-
 ---
 
-## Lab Title
+## HTTPX and Microservices (Simplified Pytest Overrides)
 
-**Replace this with the lab title**
+**HTTPX and Microservices (Simplified Pytest Overrides)**
 
-Example:
 
-> Lab 1 — Creating a Basic FastAPI Application
+> Lab 5 — HTTPX and Microservices (Simplified Pytest Overrides)
 
----
-## Repository Structure
 
-Use the following structure for the labs:
-
-```text
-project-name/
-│
-├── app/
-│   ├── __init__.py
-│   ├── main.py
-│   ├── schemas.py
-│   ├── services.py
-│   └── models.py
-│
-├── tests/
-│   ├── __init__.py
-│   └── test_main.py
-│
-├── requirements.txt
-├── README.md
-└── .gitignore
-```
+| Endpoint      | Function      |
+| ------------- | ------------- |
+| GET/health    | return application health  |
+| GET/api/users | return all users  |
+| POST/api/users | add a user  |
+| GET/api/users/{user_id} | return a user with user ID  |
+| DELETE/api/users/{user_id} | delete a user with user ID  |
+| GET/api/products/{product_id} | return a remote product  |
