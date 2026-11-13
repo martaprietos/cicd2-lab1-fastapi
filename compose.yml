@@ -1,0 +1,13 @@
+services:
+  user-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.user
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "sqlite:////data/app.db"
+    volumes:
+      - user_data:/data
+volumes:
+  user_data:
