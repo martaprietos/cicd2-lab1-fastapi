@@ -1,4 +1,5 @@
 import os
+
 import httpx
 
 PRODUCT_SERVICE_URL = os.getenv(
