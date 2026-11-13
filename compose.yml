@@ -7,7 +7,21 @@ services:
       - "8000:8000"
     environment:
       DATABASE_URL: "sqlite:////data/app.db"
+      PRODUCT_SERVICE_URL: "http://host.docker.internal:8001"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     volumes:
       - user_data:/data
+    
+  product-service:
+    build:
+      context: .
+      dockerfile: Dockerfile.product
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: "sqlite:////data/app.db" 
+    volumes:
+      - user_data:/data 
 volumes:
   user_data:
