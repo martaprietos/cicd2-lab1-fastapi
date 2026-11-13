@@ -6,3 +6,5 @@ venv/
 .coverage
 htmlcov/
 app.db
+*db
+.coverage
